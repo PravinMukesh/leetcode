@@ -3,26 +3,27 @@ package medium;
 public class MinimumNumberOfStepsToMakeTwoStringsAnagram {
 
 	public static int minSteps(String s, String t) {
-		StringBuilder sb = new StringBuilder(s.length());
-		StringBuilder sb1 = new StringBuilder(t.length());
-		sb.append(s);
-		sb1.append(t);
-		for (int i = 0; i < sb.length(); i++) {
-			for (int j = 0; j < sb1.length();) {
-				if (sb1.charAt(j) == sb.charAt(i)) {
-					sb.replace(i, i + 1, "");
-					sb1.replace(j, j + 1, "");
-					i = j = 0;
-				} else
-					j++;
-			}
+		int[] arr = new int[26];
+		int steps = 0;
+		char[] sChar = s.toCharArray();
+		char[] tChar = t.toCharArray();
+		for(int i = 0; i < sChar.length; i++) {
+			arr[sChar[i] - 'a']++;
 		}
-		return sb.length();
+		for(int j = 0; j < tChar.length; j++) {
+			if(arr[tChar[j] - 'a'] != 0) {
+				arr[tChar[j] - 'a']--;	
+			} else
+				steps++;
+		}
+		return steps;
 	}
 
 	public static void main(String[] args) {
-		String s = "bab";
-		String t = "aba";
+//		String s = "gctcxyuluxjuxnsvmomavutrrfb";
+//		String t = "qijrjrhqqjxjtprybrzpyfyqtzf";
+//		String s = "bab";
+//		String t = "aba";
 
 //		String s = "leetcode";
 //		String t = "practice";
@@ -30,8 +31,8 @@ public class MinimumNumberOfStepsToMakeTwoStringsAnagram {
 //		String s = "anagram";
 //		String t = "mangaar";
 
-//		String s = "sa";
-//		String t = "aa";
+		String s = "sa";
+		String t = "aa";
 
 //		String s = "xxyyzz";
 //		String t = "xxyyzz";
