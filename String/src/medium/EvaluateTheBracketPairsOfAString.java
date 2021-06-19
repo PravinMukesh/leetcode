@@ -19,17 +19,8 @@ public class EvaluateTheBracketPairsOfAString {
 		for (int i = 0; i < sb.length(); i++) {
 			if (sb.charAt(i) == '(') {
 				start = i;
-				for (int j = i + 1; j < sb.length(); j++) {
-					if (sb.charAt(j) == ')') {
-						end = j;
-						break;
-					}
-				}
-				if (map.containsKey(sb.substring(start + 1, end))) {
-					sb.replace(start, end + 1, map.get(sb.substring(start + 1, end)));
-				} else {
-					sb.replace(start, end + 1, "?");
-				}
+				end = sb.indexOf(")", start);
+					sb.replace(start, end + 1, map.getOrDefault(sb.substring(start + 1, end), "?"));
 			}
 		}
 		return sb.toString();
