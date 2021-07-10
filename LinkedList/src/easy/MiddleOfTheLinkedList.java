@@ -1,7 +1,7 @@
 package easy;
 
 public class MiddleOfTheLinkedList {
-	
+
 	static ListNode head;
 	static ListNode ans;
 
@@ -22,21 +22,7 @@ public class MiddleOfTheLinkedList {
 			head = newNode;
 		} else {
 			ListNode tail = head;
-			while(tail.next != null) {
-				tail = tail.next;
-			}
-			tail.next = newNode;
-		}
-	}
-	
-	private void insertNew(int val) {
-		ListNode newNode = new ListNode(val);
-		newNode.next = null;
-		if (ans == null) {
-			ans = newNode;
-		} else {
-			ListNode tail = ans;
-			while(tail.next != null) {
+			while (tail.next != null) {
 				tail = tail.next;
 			}
 			tail.next = newNode;
@@ -44,27 +30,14 @@ public class MiddleOfTheLinkedList {
 	}
 
 	private ListNode middleNode(ListNode head) {
-		int counter = 0;
-		int size = getSize(head);
-		int middleNode = (size)/2;
-		while(size > 0) {
-			if(counter >= middleNode) {
-				insertNew(head.val);
-			}
-			head = head.next;
-			counter++;
-			size--;
+		if (head == null)
+			return head;
+		ListNode ans = head;
+		while (head != null && head.next != null) {
+			ans = ans.next;
+			head = head.next.next;
 		}
 		return ans;
-	}
-	
-	private int getSize(ListNode head) {
-		int count = 1;
-		while(head.next != null) {
-			head = head.next;
-			count++;
-		}
-		return count;
 	}
 
 	public static void main(String[] args) {
@@ -74,7 +47,7 @@ public class MiddleOfTheLinkedList {
 		cast.insert(3);
 		cast.insert(4);
 		cast.insert(5);
-		cast.insert(6);
+//		cast.insert(6);
 		System.out.println(cast.middleNode(head));
 	}
 }
