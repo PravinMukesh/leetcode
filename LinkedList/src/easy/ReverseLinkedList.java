@@ -1,9 +1,5 @@
 package easy;
 
-import java.util.Stack;
-
-import easy.DeleteNodeInALinkedList.ListNode;
-
 public class ReverseLinkedList {
 	static ListNode head;
 	static ListNode ans;
@@ -33,27 +29,16 @@ public class ReverseLinkedList {
 	}
 
 	public ListNode reverseList(ListNode head) {
-		Stack<Integer> stack = new Stack<>();
+		ListNode previous = null;
 		while (head != null) {
-			stack.push(head.val);
+			ListNode currentNode = head;
 			head = head.next;
+			currentNode.next = previous;
+			previous = currentNode;
 		}
-		while(stack.size() > 0) {
-			ListNode newNode = new ListNode(stack.pop());
-			newNode.next = null;
-			if (ans == null)
-				ans = newNode;
-			else {
-				ListNode tail = ans;
-				while (tail.next != null) {
-					tail = tail.next;
-				}
-				tail.next = newNode;
-			}
-		}
-		return ans;
+		return previous;
 	}
-
+	
 	public static void main(String[] args) {
 		ReverseLinkedList cast = new ReverseLinkedList();
 		cast.insert(1);
