@@ -34,16 +34,20 @@ public class RemoveDuplicatesFromSortedList {
 	public ListNode deleteDuplicates(ListNode head) {
 		while (head != null) {
 			if (head.next != null && head.val == head.next.val) {
-				head.val = head.next.val;
-				head.next = head.next.next;
+				head = head.next;
 			} else {
-				if (fresh == null) {
-					fresh = head;
-					head = head.next;
-				} else {
-					fresh.next = head;
-					head = head.next;
+				ListNode newNode = new ListNode(head.val);
+				newNode.next = null;
+				if (fresh == null)
+					fresh = newNode;
+				else {
+					ListNode tail = fresh;
+					while (tail.next != null) {
+						tail = tail.next;
+					}
+					tail.next = newNode;
 				}
+				head = head.next;
 			}
 		}
 		return fresh;
@@ -51,11 +55,20 @@ public class RemoveDuplicatesFromSortedList {
 
 	public static void main(String[] args) {
 		RemoveDuplicatesFromSortedList cast = new RemoveDuplicatesFromSortedList();
+//		cast.insert(1);
+//		cast.insert(1);
+//		cast.insert(2);
+//		cast.insert(3);
+//		cast.insert(3);
+		
+//		cast.insert(1);
+//		cast.insert(1);
+//		cast.insert(2);
+		
 		cast.insert(1);
 		cast.insert(1);
-		cast.insert(2);
-		cast.insert(3);
-		cast.insert(3);
+		cast.insert(1);
+		
 		System.out.println(cast.deleteDuplicates(head));
 	}
 
