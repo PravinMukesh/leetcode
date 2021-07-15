@@ -1,7 +1,5 @@
 package easy;
 
-import easy.ReverseLinkedList.ListNode;
-
 public class RemoveDuplicatesFromSortedList {
 
 	static ListNode head;
@@ -31,44 +29,51 @@ public class RemoveDuplicatesFromSortedList {
 		}
 	}
 
+//	public ListNode deleteDuplicates(ListNode head) {
+//		ListNode tail = head;
+//		while (tail != null) {
+//			if (tail.next != null && tail.val == tail.next.val)
+//				tail.next = tail.next.next;
+//			else
+//				tail = tail.next;
+//		}
+//		return head;
+//	}
+
 	public ListNode deleteDuplicates(ListNode head) {
-		while (head != null) {
-			if (head.next != null && head.val == head.next.val) {
-				head = head.next;
-			} else {
-				ListNode newNode = new ListNode(head.val);
-				newNode.next = null;
-				if (fresh == null)
-					fresh = newNode;
-				else {
-					ListNode tail = fresh;
-					while (tail.next != null) {
-						tail = tail.next;
-					}
-					tail.next = newNode;
+		ListNode currentNode = head;
+		ListNode tailNode;
+		while (currentNode != null && currentNode.next != null) {
+			if (currentNode.val == currentNode.next.val) {
+				tailNode = currentNode.next.next;
+				if (tailNode == null) {
+					currentNode.next = null;
+					break;
 				}
-				head = head.next;
+				currentNode.next = tailNode;
 			}
+			if (currentNode.val != currentNode.next.val)
+				currentNode = currentNode.next;
 		}
-		return fresh;
+		return head;
 	}
 
 	public static void main(String[] args) {
 		RemoveDuplicatesFromSortedList cast = new RemoveDuplicatesFromSortedList();
+		cast.insert(1);
+		cast.insert(1);
+		cast.insert(2);
+		cast.insert(3);
+		cast.insert(3);
+
 //		cast.insert(1);
 //		cast.insert(1);
 //		cast.insert(2);
-//		cast.insert(3);
-//		cast.insert(3);
-		
+
 //		cast.insert(1);
 //		cast.insert(1);
-//		cast.insert(2);
-		
-		cast.insert(1);
-		cast.insert(1);
-		cast.insert(1);
-		
+//		cast.insert(1);
+
 		System.out.println(cast.deleteDuplicates(head));
 	}
 
