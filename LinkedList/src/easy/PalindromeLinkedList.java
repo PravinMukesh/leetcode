@@ -36,7 +36,7 @@ public class PalindromeLinkedList {
 
 	public boolean isPalindrome(ListNode head) {
 		ListNode currentNode = head;
-		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> stack = new Stack<>();
 		while(currentNode != null) {
 			stack.push(currentNode.val);
 			currentNode = currentNode.next;
@@ -47,7 +47,7 @@ public class PalindromeLinkedList {
 			} else
 				head = head.next;
 		}
-			return false;
+			return true;
 	}
 
 
@@ -55,8 +55,8 @@ public class PalindromeLinkedList {
 		PalindromeLinkedList cast = new PalindromeLinkedList();
 		cast.insert(1);
 		cast.insert(2);
+		cast.insert(2);
 		cast.insert(1);
-//		cast.insert(1);
 		System.out.println(cast.isPalindrome(head));
 	}
 
